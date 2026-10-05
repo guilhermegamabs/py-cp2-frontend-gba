@@ -1,0 +1,6 @@
+streamlit>=1.40.0
+# Exigência da disciplina: o consumo da API é feito com requests.
+requests>=2.32.0
+pandas>=2.0.0
+# Já vem com o Streamlit, mas é importado direto em historico_view: declarado explicitamente.
+altair>=5.0.0

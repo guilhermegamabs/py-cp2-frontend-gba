@@ -1,0 +1,5 @@
+# API
+fastapi>=0.115.0
+uvicorn[standard]>=0.32.0
+# Driver MySQL puro Python: não exige compilador nem cliente MySQL instalado no Windows.
+PyMySQL>=1.1.0

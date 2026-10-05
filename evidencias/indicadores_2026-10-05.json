@@ -1,0 +1,79 @@
+[
+  {
+    "codigo": "total_chamadas",
+    "rotulo": "Volume de chamadas na janela",
+    "valor": 95.0,
+    "unidade": "chamadas",
+    "limiar": 1.0,
+    "operador": ">=",
+    "conforme": true,
+    "grafico_sugerido": "Barra por hora — mostra concentração de uso e janelas sem tráfego",
+    "acao_ao_estourar": "Volume zero por mais de uma janela indica front sem instrumentação ou API fora do ar: validar o cliente antes de concluir qualquer indicador."
+  },
+  {
+    "codigo": "latencia_media_ms",
+    "rotulo": "Latência média",
+    "valor": 102.26,
+    "unidade": "ms",
+    "limiar": 500.0,
+    "operador": "<=",
+    "conforme": true,
+    "grafico_sugerido": "Linha temporal com banda do limiar — evidencia degradação gradual",
+    "acao_ao_estourar": "Acima do limiar, verificar o provider de sensores antes da API: medir a latência do coletor e, se confirmada, reduzir a janela padrão do histórico."
+  },
+  {
+    "codigo": "latencia_p95_ms",
+    "rotulo": "Latência no percentil 95",
+    "valor": 251.29,
+    "unidade": "ms",
+    "limiar": 500.0,
+    "operador": "<=",
+    "conforme": true,
+    "grafico_sugerido": "Linha do p95 sobreposta à da média — a distância entre as duas revela cauda longa que a média esconde",
+    "acao_ao_estourar": "P95 estourado com média conforme indica lentidão intermitente: investigar as chamadas lentas pelo id e correlacionar por funcionalidade."
+  },
+  {
+    "codigo": "taxa_sucesso",
+    "rotulo": "Taxa de sucesso das chamadas",
+    "valor": 0.9574,
+    "unidade": "fração",
+    "limiar": 0.99,
+    "operador": ">=",
+    "conforme": false,
+    "grafico_sugerido": "Linha temporal com área de erro empilhada por status",
+    "acao_ao_estourar": "Abaixo do limiar, classificar os erros por status: 4xx aponta contrato errado no front; 5xx aponta falha na API e exige correção antes de novo uso."
+  },
+  {
+    "codigo": "freshness_medio_s",
+    "rotulo": "Freshness médio do dado entregue",
+    "valor": 183.28,
+    "unidade": "s",
+    "limiar": 120.0,
+    "operador": "<=",
+    "conforme": false,
+    "grafico_sugerido": "Linha temporal da idade média do dado",
+    "acao_ao_estourar": "Dado mais velho que o limiar deve ser exibido na interface com marca de desatualizado, e a leitura não pode embasar decisão de manutenção até que o coletor seja verificado."
+  },
+  {
+    "codigo": "taxa_completude_freshness",
+    "rotulo": "Taxa de completude de freshness",
+    "valor": 0.275,
+    "unidade": "fração",
+    "limiar": 0.8,
+    "operador": ">=",
+    "conforme": false,
+    "grafico_sugerido": "Linha de evolução da taxa — é a forma de ver se a coleta degrada no tempo",
+    "acao_ao_estourar": "Abaixo do limiar, identificar quais grandezas faltaram por ativo: falha concentrada num sensor é troca de hardware; espalhada é problema de rede ou do coletor."
+  },
+  {
+    "codigo": "cobertura_contexto",
+    "rotulo": "Cobertura dos headers de contexto",
+    "valor": 0.9579,
+    "unidade": "fração",
+    "limiar": 1.0,
+    "operador": ">=",
+    "conforme": false,
+    "grafico_sugerido": "Barra por funcionalidade — isola qual tela não envia contexto",
+    "acao_ao_estourar": "Chamada sem X-Session-Id ou X-Feature não é rastreável. Abaixo do limiar, corrigir o cliente: sem contexto, nenhum outro indicador pode ser atribuído a uma funcionalidade."
+  }
+]
