@@ -21,7 +21,9 @@ Três partes, uma pasta cada:
 ├── db/                   scripts SQL versionados do sensor_db (MySQL 8)
 ├── backend/              API FastAPI
 ├── frontend/             interface Streamlit
-└── scripts/              consumo da API via requests, fora da interface
+├── scripts/              consumo da API via requests, fora da interface
+├── evidencias/           coleta real que embasa o documento de Governança
+└── governanca/           documento ABNT da disciplina de Governança em IA
 ```
 
 O código segue **pacote por camada** (`package-by-layer`): cada pasta é uma camada, não
@@ -116,6 +118,19 @@ Opcional, só em ambiente local, para a interface não abrir vazia:
 mysql -u root -proot < db/V2__seed.sql
 ```
 
+> **Se `mysql` não for reconhecido como comando**, o cliente não está no `PATH` — é o padrão
+> numa instalação limpa do MySQL no Windows. Use o caminho completo:
+>
+> ```bash
+> "C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql.exe" -u root -proot < db/V1__schema.sql
+> ```
+>
+> Ou aplique o schema pelo próprio driver do projeto, sem depender do cliente:
+>
+> ```bash
+> python db/aplicar_schema.py
+> ```
+
 ### 4. API
 
 ```bash
@@ -156,6 +171,12 @@ o que mostrar depois que houve chamada de verdade.
 Toda chamada do front envia os headers de contexto **`X-Session-Id`** e **`X-Feature`**, e
 recebe de volta **`X-Call-Id`**, que correlaciona a chamada com a linha do relatório.
 
+`X-Feature` aceita `ativos`, `leitura-atual`, `historico` e `observabilidade` — um valor por
+tela, para que o relatório diga de qual funcionalidade veio cada chamada. Valor fora dessa
+lista, ou header ausente, é registrado como `desconhecida` e derruba o indicador de
+cobertura de contexto, que é exatamente o comportamento esperado: lacuna de instrumentação
+tem de aparecer no relatório, não ser corrigida em silêncio.
+
 ## Contrato de observabilidade
 
 Cada chamada recebida gera uma linha em `sensor_tb_request_processing` com:
@@ -184,6 +205,14 @@ limiar que existe apenas no documento envelhece sem ninguém perceber.
 
 Os limiares são variáveis de ambiente (ver [`.env.example`](.env.example)): recalibrar o
 baseline não exige mexer em código.
+
+## Vídeo
+
+Demonstração do projeto rodando localmente, para o caso de o ambiente de avaliação não
+subir: **[link do vídeo](_preencher_)**.
+
+Percorre, nesta ordem: schema aplicado, API no ar em `/docs`, as três telas da interface e
+o script de consumo imprimindo os indicadores. Roteiro em [`VIDEO.md`](VIDEO.md).
 
 ## Escopo
 

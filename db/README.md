@@ -13,6 +13,13 @@ mysql -u root -proot < db/V1__schema.sql
 mysql -u root -proot < db/V2__seed.sql
 ```
 
+Sem o cliente `mysql` no `PATH` — o padrão numa instalação limpa no Windows — os dois
+scripts acima saem em uma linha, pelo driver que o back-end já usa:
+
+```bash
+python db/aplicar_schema.py --seed
+```
+
 Conferir:
 
 ```bash
@@ -22,6 +29,7 @@ mysql -u root -proot sensor_db -e "DESCRIBE sensor_tb_request_processing;"
 | Script | O que faz | Reexecutável |
 |---|---|---|
 | `V1__schema.sql` | Cria `sensor_db` e `sensor_tb_request_processing` | Não — `CREATE TABLE` sem `IF NOT EXISTS`, de propósito |
+| `aplicar_schema.py` | Aplica os `.sql` acima sem depender do cliente `mysql` | Segue a reexecutabilidade de cada script que aplica |
 | `V2__seed.sql` | Cinco chamadas de exemplo, só local | Sim — `ON DUPLICATE KEY` |
 | `queries/observabilidade.sql` | Catálogo de consultas do relatório | Sim — somente `SELECT` |
 | `reset.sql` | **Destrutivo**: dropa o database | — |
