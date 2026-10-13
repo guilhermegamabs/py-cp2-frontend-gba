@@ -27,7 +27,8 @@ def render() -> None:
     col1, col2, col3 = st.columns([2, 2, 3])
     limit = col1.number_input("Registros exibidos", min_value=10, max_value=1000, value=100, step=10)
     feature = col2.selectbox(
-        "Funcionalidade", ["todas", "leitura-atual", "historico", "observabilidade", "desconhecida"]
+        "Funcionalidade",
+        ["todas", "ativos", "leitura-atual", "historico", "observabilidade", "desconhecida"],
     )
     only_session = col3.checkbox(
         "Somente esta sessão", value=False,
@@ -55,7 +56,7 @@ def render() -> None:
     _render_distributions(report)
     _render_latency_series(report["registros"])
     _render_records(report["registros"])
-    _render_contract(report["indicadores"])
+    _render_contract(session_id)
 
 
 def _render_indicators(indicators: list[dict]) -> None:
@@ -120,7 +121,8 @@ def _render_records(records: list[dict]) -> None:
             "Rota": record["rota"],
             "Tag": record["tag"] or "—",
             "Processamento": record["status_processamento"],
-            "HTTP": record["status_http"] or "—",
+            # str sempre: int e "—" na mesma coluna quebram a conversão para Arrow.
+            "HTTP": str(record["status_http"]) if record["status_http"] else "—",
             "Latência": formatter.number(record["latencia_ms"], " ms"),
             "Severidade": formatter.severity_label(record["severidade"]),
             "Freshness": formatter.duration_seconds(record["freshness_segundos"]),
@@ -129,7 +131,7 @@ def _render_records(records: list[dict]) -> None:
         }
         for record in records
     ]
-    st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True)
+    st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
 
     in_progress = [r for r in records if r["status_processamento"] == "EM_PROCESSAMENTO"]
     if in_progress:
@@ -140,12 +142,18 @@ def _render_records(records: list[dict]) -> None:
         )
 
 
-def _render_contract(indicators: list[dict]) -> None:
+def _render_contract(session_id: str) -> None:
     with st.expander("Contrato de observabilidade — limiar, gráfico sugerido e ação de estouro"):
         st.caption(
             "Vem de `GET /v1/observabilidade/contrato`, a mesma fonte que a API aplica. "
             "É o insumo direto do documento da disciplina de Governança em IA."
         )
+        try:
+            indicators = observability_api.get_contract(session_id)
+        except ApiError as error:
+            components.show_api_error(error)
+            return
+
         for indicator in indicators:
             st.markdown(
                 f"**{indicator['rotulo']}** (`{indicator['codigo']}`) — limiar "

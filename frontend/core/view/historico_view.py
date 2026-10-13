@@ -71,7 +71,7 @@ def _render_series(frame: pd.DataFrame) -> None:
     # Uma grandeza por gráfico: tensão e vibração na mesma escala achatam a segunda.
     for column in frame.columns:
         st.caption(column)
-        st.altair_chart(_line_chart(frame, column), use_container_width=True)
+        st.altair_chart(_line_chart(frame, column), width="stretch")
 
 
 def _line_chart(frame: pd.DataFrame, column: str) -> alt.Chart:
@@ -104,4 +104,4 @@ def _render_table(history: dict) -> None:
             }
             for point in reversed(history["pontos"])
         ]
-        st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True)
+        st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")

@@ -6,7 +6,7 @@ from fastapi.responses import JSONResponse
 from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from core.exception.error_response import ErrorResponse, FieldErrorItem
-from core.exception.exceptions import SensorNotFoundException, SensorOfflineException
+from core.exception.exceptions import SensorNotFoundException
 
 logger = logging.getLogger(__name__)
 
@@ -24,11 +24,6 @@ def register_exception_handlers(app: FastAPI) -> None:
         if exc.status_code == 404:
             message = "Rota não encontrada."
         return _build(exc.status_code, "HTTP Error", message, request)
-
-    # ------------------------------------------------------------------ 409
-    @app.exception_handler(SensorOfflineException)
-    async def handle_sensor_offline(request: Request, exc: SensorOfflineException):
-        return _build(409, "Conflict", str(exc), request)
 
     # ------------------------------------------------------------------ 400
     @app.exception_handler(RequestValidationError)

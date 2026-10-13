@@ -4,7 +4,8 @@ from core.types.sensor import SensorHistory, SensorReading, SensorSummary
 
 
 def list_sensors(session_id: str) -> list[SensorSummary]:
-    return http_client.get("/sensores", session_id, Feature.CURRENT_READING)
+    # Funcionalidade própria: marcar como `leitura-atual` inflaria o volume daquela tela.
+    return http_client.get("/sensores", session_id, Feature.ASSETS)
 
 
 def get_current_reading(session_id: str, tag: str) -> SensorReading:

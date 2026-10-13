@@ -66,7 +66,7 @@ def _render_metrics(reading: dict) -> None:
         }
         for metric in reading["metricas"]
     ]
-    st.dataframe(pd.DataFrame(rows), hide_index=True, use_container_width=True)
+    st.dataframe(pd.DataFrame(rows), hide_index=True, width="stretch")
 
     missing = [m["rotulo"] for m in reading["metricas"] if m["valor"] is None]
     if missing:

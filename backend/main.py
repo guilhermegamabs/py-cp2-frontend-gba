@@ -32,7 +32,9 @@ app = FastAPI(
 )
 
 configure_cors(app)
-# Depois do CORS, portanto por dentro dele: o preflight não vira registro.
+# `add_middleware` empilha de fora para dentro: o último registrado é o mais externo.
+# A observabilidade fica, portanto, por fora do CORS e enxerga o preflight — por isso o
+# próprio middleware descarta `OPTIONS`, senão cada chamada do navegador viraria duas linhas.
 app.add_middleware(ObservabilityMiddleware)
 register_exception_handlers(app)
 

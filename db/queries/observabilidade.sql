@@ -28,7 +28,7 @@ SELECT COUNT(*)                                                        AS total,
 
 -- Freshness medio e taxa de completude de freshness. Limiares: 120 s e 0.80.
 SELECT ROUND(AVG(freshness_seconds), 2)                                        AS freshness_medio_s,
-       ROUND(SUM(freshness_seconds <= 120 AND completeness_ratio >= 1) / COUNT(*), 4)
+       ROUND(SUM(freshness_seconds <= 120 AND completeness_ratio >= 0.80) / COUNT(*), 4)
                                                                                AS taxa_completude_freshness
   FROM sensor_tb_request_processing
  WHERE freshness_seconds IS NOT NULL;

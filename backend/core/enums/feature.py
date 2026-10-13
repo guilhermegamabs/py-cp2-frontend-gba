@@ -2,6 +2,7 @@ from enum import Enum
 
 
 class Feature(str, Enum):
+    ASSETS = "ativos"
     CURRENT_READING = "leitura-atual"
     HISTORY = "historico"
     OBSERVABILITY = "observabilidade"

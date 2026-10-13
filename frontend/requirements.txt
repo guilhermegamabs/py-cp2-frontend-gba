@@ -1,4 +1,6 @@
-streamlit>=1.40.0
+# 1.49 é o piso: antes disso `width="stretch"` não existe e o parâmetro antigo
+# (`use_container_width`) já está marcado para remoção.
+streamlit>=1.49.0
 # Exigência da disciplina: o consumo da API é feito com requests.
 requests>=2.32.0
 pandas>=2.0.0
