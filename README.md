@@ -9,8 +9,11 @@ e consome essa API numa interface Streamlit via `requests`.
 
 | RM | Nome |
 |---|---|
-| _preencher_ | _preencher_ |
-| _preencher_ | _preencher_ |
+| RM565293 | Guilherme Gama |
+| RM552574 | Bruno Fernandes Nascimento |
+| RM565260 | Edgar Lódula de Assis |
+| RM566325 | Júlia Aben-Athar |
+| RM563632 | Igor Thiago Nakajima Vieira |
 
 ## Arquitetura
 

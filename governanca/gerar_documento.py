@@ -17,10 +17,11 @@ FONTE = "Arial"
 PRETO = RGBColor(0, 0, 0)
 
 AUTORES = [
-    "[RM00000] [Nome completo do integrante 1]",
-    "[RM00000] [Nome completo do integrante 2]",
-    "[RM00000] [Nome completo do integrante 3]",
-    "[RM00000] [Nome completo do integrante 4]",
+    "RM565293 Guilherme Gama",
+    "RM552574 Bruno Fernandes Nascimento",
+    "RM565260 Edgar Lódula de Assis",
+    "RM566325 Júlia Aben-Athar",
+    "RM563632 Igor Thiago Nakajima Vieira",
 ]
 
 doc = Document()

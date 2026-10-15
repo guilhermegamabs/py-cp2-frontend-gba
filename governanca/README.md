@@ -8,34 +8,19 @@ envelhecer sem aviso.
 
 | Arquivo | O que é |
 |---|---|
-| `Governanca_IA_Observabilidade_Sensor_Monitoring_API.docx` | Documento final, formatado em ABNT |
-| `gerar_documento.py` | Gera o `.docx` acima a partir do código, para refazer sem reformatar à mão |
+| `Governanca_IA_Observabilidade_Sensor_Monitoring_API.pdf` | **Documento final entregue**, em ABNT, com a conclusão escrita pelo grupo |
+| `gerar_documento.py` | Gera o esqueleto do documento em `.docx`, para refazer a estrutura sem reformatar à mão |
 
-## O que falta preencher antes de entregar
+## O documento final
 
-O documento está completo em conteúdo e formatação, e tem **três lacunas deliberadas**.
-Todas aparecem no texto entre colchetes e em negrito.
+O PDF é a versão entregue: 25 páginas, com capa, folha de rosto, resumo, lista de quadros,
+lista de siglas, sumário paginado, dez seções numeradas e referências.
 
-1. **Capa e folha de rosto** — RM e nome completo de cada integrante, e o nome do
-   professor orientador. Estão como `[RM00000] [Nome completo do integrante N]`.
-2. **Seção 9, Conclusão** — tem de ser escrita pelo grupo, **sem IA**. O critério de
-   avaliação exige as palavras e percepções dos integrantes e vale 3,0 pontos. No lugar do
-   texto há um bloco de perguntas para orientar a escrita; apagar o bloco inteiro depois.
-3. **Seção 10, Uso de IA** — a declaração está redigida, mas precisa ser conferida e
-   ajustada ao que o grupo efetivamente fez. Declaração falsa é pior que declaração
-   ausente.
+A conclusão (seção 9) e a declaração de uso de IA (seção 10) foram escritas pelos
+integrantes. O sumário é uma página estática, com os números de página conferidos contra o
+PDF renderizado — não é campo do Word e não precisa de atualização.
 
-## Ao abrir o arquivo pela primeira vez
-
-O sumário é um campo do Word, não uma lista digitada — ele se preenche sozinho com os
-números de página corretos. Se abrir vazio, selecionar tudo com `Ctrl+A` e apertar `F9`.
-Depois apagar o aviso em itálico logo abaixo do sumário.
-
-Conferir também, no Word, antes de entregar: o número de página deve aparecer no canto
-superior direito **a partir da Introdução**, e a contagem deve começar na folha de rosto
-(a capa não é contada). É o que a NBR 14724 pede.
-
-## Para refazer o documento
+## Para refazer a estrutura
 
 ```bash
 pip install python-docx
@@ -45,10 +30,10 @@ pip install python-docx
 python governanca/gerar_documento.py
 ```
 
-Sobrescreve o `.docx`. **Atenção**: regerar apaga a conclusão escrita pelo grupo e os
-nomes preenchidos, porque o script reconstrói o arquivo do zero. Depois que o documento
-começar a ser editado no Word, editar no Word — o script serve para refazer a estrutura,
-não para manter o texto final.
+Gera um `.docx` novo a partir do código. **Atenção**: o script reconstrói o arquivo do
+zero, então o resultado **não** contém a conclusão escrita pelo grupo nem o sumário
+paginado — serve para refazer a formatação base, não para regerar a entrega. O documento
+entregue é o PDF acima.
 
 ## De onde vêm os números
 
