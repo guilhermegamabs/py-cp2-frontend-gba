@@ -209,6 +209,14 @@ limiar que existe apenas no documento envelhece sem ninguém perceber.
 Os limiares são variáveis de ambiente (ver [`.env.example`](.env.example)): recalibrar o
 baseline não exige mexer em código.
 
+## Vídeo
+
+Demonstração do projeto rodando localmente, para o caso de o ambiente de avaliação não
+subir: **https://youtu.be/ZDUppLkgwsA**
+
+Percorre, nesta ordem: schema aplicado, API no ar em `/docs`, as três telas da interface e
+o script de consumo imprimindo os indicadores.
+
 ## Escopo
 
 **Abordado**: provider de Sensores (leitura atual e histórico), headers de contexto,
